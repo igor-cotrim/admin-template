@@ -10,10 +10,12 @@ type LayoutProps = {
 
 const Layout = ({ title, subtitle, children }: LayoutProps) => {
   return (
-    <div>
-      <Header title={title} subtitle={subtitle} />
+    <div className="flex h-screen w-screen ">
       <Sidebar />
-      <Content>{children}</Content>
+      <div className="flex flex-col w-full p-7 bg-gray-300 dark:bg-gray-800">
+        <Header title={title} subtitle={subtitle} />
+        <Content>{children}</Content>
+      </div>
     </div>
   )
 }
