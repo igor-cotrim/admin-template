@@ -5,12 +5,10 @@ type HeaderProps = {
   subtitle: string
 }
 
-const Header = ({ subtitle, title }: HeaderProps) => {
-  return (
-    <div>
-      <Title title={title} subtitle={subtitle} />
-    </div>
-  )
-}
+const Header = ({ subtitle, title }: HeaderProps) => (
+  <div>
+    <Title title={title} subtitle={subtitle} />
+  </div>
+)
 
 export default Header

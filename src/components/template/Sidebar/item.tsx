@@ -14,31 +14,29 @@ const ItemSidebar = ({
   url,
   onClick,
   className
-}: ItemSidebarProps) => {
-  return (
-    <li
-      onClick={onClick}
-      className={`dark:hover:bg-gray-800 hover:bg-gray-100 cursor-pointer`}
-    >
-      {url ? (
-        <Link href={url}>
-          <a
-            className={`dark:text-gray-200 flex flex-col justify-center items-center text-gray-600 h-20 w-20 ${className}`}
-          >
-            {icon}
-            <span className={`text-xs font-light`}>{text}</span>
-          </a>
-        </Link>
-      ) : (
+}: ItemSidebarProps) => (
+  <li
+    onClick={onClick}
+    className={`dark:hover:bg-gray-800 hover:bg-gray-100 cursor-pointer`}
+  >
+    {url ? (
+      <Link href={url}>
         <a
-          className={`flex flex-col justify-center items-center text-gray-600 h-20 w-20 ${className}`}
+          className={`dark:text-gray-200 flex flex-col justify-center items-center text-gray-600 h-20 w-20 ${className}`}
         >
           {icon}
           <span className={`text-xs font-light`}>{text}</span>
         </a>
-      )}
-    </li>
-  )
-}
+      </Link>
+    ) : (
+      <a
+        className={`flex flex-col justify-center items-center text-gray-600 h-20 w-20 ${className}`}
+      >
+        {icon}
+        <span className={`text-xs font-light`}>{text}</span>
+      </a>
+    )}
+  </li>
+)
 
 export default ItemSidebar

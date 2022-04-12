@@ -8,16 +8,14 @@ type LayoutProps = {
   children?: React.ReactNode
 }
 
-const Layout = ({ title, subtitle, children }: LayoutProps) => {
-  return (
-    <div className={`dark flex h-screen w-screen`}>
-      <Sidebar />
-      <div className="flex flex-col w-full p-7 bg-gray-300 dark:bg-gray-800">
-        <Header title={title} subtitle={subtitle} />
-        <Content>{children}</Content>
-      </div>
+const Layout = ({ title, subtitle, children }: LayoutProps) => (
+  <div className={`dark flex h-screen w-screen`}>
+    <Sidebar />
+    <div className="flex flex-col w-full p-7 bg-gray-300 dark:bg-gray-800">
+      <Header title={title} subtitle={subtitle} />
+      <Content>{children}</Content>
     </div>
-  )
-}
+  </div>
+)
 
 export default Layout
