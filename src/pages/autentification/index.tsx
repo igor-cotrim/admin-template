@@ -1,6 +1,8 @@
 /* eslint-disable @next/next/no-img-element */
 import React, { useState } from 'react'
 
+import useAuth from '../../data/hooks/useAuth'
+
 import { IconExclamation, IconGoogle } from '../../components/icons'
 import AuthInput from '../../components/auth/AuthInput'
 
@@ -8,22 +10,15 @@ const Autentification = () => {
   const [mode, setMode] = useState<'signIn' | 'signUp'>('signIn')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const [error, setError] = useState<null | string>(null)
+  const { signInGoogle, signIn, signUp, error, loading } = useAuth()
 
-  const handleError = (msg: string, time = 5) => {
-    setError(msg)
-    setTimeout(() => setError(null), time * 1000)
-  }
-
-  const onSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
 
     if (mode === 'signIn') {
-      console.log('login')
-      handleError('Ocorreu um erro no login!')
+      await signIn?.(email, password)
     } else {
-      console.log('cadastro')
-      handleError('Ocorreu um erro no cadastro!')
+      await signUp?.(email, password)
     }
   }
 
@@ -36,7 +31,10 @@ const Autentification = () => {
           className={`h-screen w-full object-cover`}
         />
       </div>
-      <form className={`m-10 w-full  md:w-1/2 lg:w-1/3`} onSubmit={onSubmit}>
+      <form
+        className={`m-10 w-full  md:w-1/2 lg:w-1/3`}
+        onSubmit={handleSubmit}
+      >
         <h1
           className={`
           text-3xl font-bold mb-5
@@ -71,14 +69,15 @@ const Autentification = () => {
         />
         <button
           className={`
-          w-full bg-indigo-500 hover:bg-indigo-400 
+            w-full bg-indigo-500 hover:bg-indigo-400 
           text-white rounded-lg px-4 py-3 mt-6 transition-all`}
         >
-          {mode === 'signIn' ? 'Entrar' : 'Cadastrar'}
+          {loading ? 'Entrando' : 'Entrar'}
         </button>
         <hr className={`my-6 border-gray-300 w-full`} />
         <button
           type="button"
+          onClick={signInGoogle}
           className={`
           flex items-center justify-center
           w-full bg-white hover:bg-gray-100 border border-red-400
